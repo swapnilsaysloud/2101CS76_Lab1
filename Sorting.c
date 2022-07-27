@@ -2,6 +2,7 @@
 #include <stdio.h>
 /* Function to sort an array using insertion sort*/
 void insertionSort(int arr[], int n)
+
 {
     int i, key, j;
     for (i = 1; i < n; i++)
@@ -17,6 +18,21 @@ void insertionSort(int arr[], int n)
             j = j - 1;
         }
         arr[j + 1] = key;
+    }
+}
+void selectionSort(int arr[], int n)
+{
+    int i, j, min_idx;
+    // One by one move boundary of unsorted subarray
+    for (i = 0; i < n - 1; i++)
+    {
+        // Find the minimum element in unsorted array
+        min_idx = i;
+        for (j = i + 1; j < n; j++)
+            if (arr[j] < arr[min_idx])
+                min_idx = j;
+        // Swap the found minimum element with the first element
+        swap(&arr[min_idx], &arr[i]);
     }
 }
 // A function to print an array of size n
@@ -44,6 +60,11 @@ int main()
     {
     case 1: // For insertion sort
         insertionSort(arr, n);
+        printf("Sorted array: \n");
+        printArray(arr, n);
+        break;
+    case 2: // For selection sort
+        selectionSort(arr, n);
         printf("Sorted array: \n");
         printArray(arr, n);
         break;
