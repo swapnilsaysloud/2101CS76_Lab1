@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+/* C program to perform all the types of sorts */
 /* Function to sort an array using insertion sort*/
 void insertionSort(int arr[], int n)
 
@@ -121,6 +122,54 @@ void mergeSort(int arr[], int l, int r)
     }
 }
 // A function to print an array of size n
+int partition(int arr[], int lo, int hi)
+{
+
+    // select the rightmost element as pivot
+    int pivot = arr[hi];
+
+    // pointer for greater element
+    int i = (lo - 1);
+
+    // traverse each element of the array
+    // compare them with the pivot
+    for (int j = lo; j < hi; j++)
+    {
+        if (arr[j] <= pivot)
+        {
+
+            // if element smaller than pivot is found
+            // swap it with the greater element pointed by i
+            i++;
+
+            // swap element at i with element at j
+            swap(&arr[i], &arr[j]);
+        }
+    }
+
+    // swap the pivot element with the greater element at i
+    swap(&arr[i + 1], &arr[hi]);
+
+    // return the partition point
+    return (i + 1);
+}
+void quickSort(int array[], int low, int high)
+{
+    if (low < high)
+    {
+
+        // find the pivot element such that
+        // elements smaller than pivot are on left of pivot
+        // elements greater than pivot are on right of pivot
+        int pi = partition(array, low, high);
+
+        // recursive call on the left of pivot
+        quickSort(array, low, pi - 1);
+
+        // recursive call on the right of pivot
+        quickSort(array, pi + 1, high);
+    }
+}
 void printArray(int arr[], int n)
 {
     int i;
@@ -162,6 +211,11 @@ int main()
     case 4: // Merge sort
         mergeSort(arr, 0, n - 1);
         printf("\nSorted array is \n");
+        printArray(arr, n);
+        break;
+    case 5: // Quick sort
+        quickSort(arr, 0, n - 1);
+        printf("Sorted array : \n");
         printArray(arr, n);
         break;
     }
