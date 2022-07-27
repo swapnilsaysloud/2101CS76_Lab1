@@ -23,6 +23,8 @@ int main()
     case '/':
         printf("%.1lf / %.1lf = %.1lf", num1, num2, num1 / num2);
         break;
+    default:
+        printf("Error! please use a valid operator \n");
     }
     return 0;
 }
